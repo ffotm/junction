@@ -48,57 +48,23 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-[#1e3a8a] via-[#3b82f6] to-[#ffffff]">
-      <div className="w-full max-w-4xl h-auto bg-white/10 rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden relative">
-        {/* Decorative SVGs and dots */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          {/* Top right wave (mirrored) */}
-          <svg className="absolute top-0 right-0 w-1/2 h-40 opacity-60" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{transform: 'scaleX(-1)'}}>
-            <path d="M0,80 Q100,20 200,80 T400,80 V100 H0 Z" fill="url(#wave1)" />
-            <defs>
-              <linearGradient id="wave1" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#1e3a8a" />
-                <stop offset="1" stopColor="#3b82f6" />
-              </linearGradient>
-            </defs>
-          </svg>
-          {/* Bottom left wave (mirrored) */}
-          <svg className="absolute bottom-0 left-0 w-2/3 h-32 opacity-50" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{transform: 'scaleX(-1)'}}>
-            <path d="M0,20 Q100,80 200,20 T400,20 V0 H0 Z" fill="url(#wave2)" />
-            <defs>
-              <linearGradient id="wave2" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#3b82f6" />
-                <stop offset="1" stopColor="#1e3a8a" />
-              </linearGradient>
-            </defs>
-          </svg>
-          {/* Decorative dots (mirrored) */}
-          <svg className="absolute right-10 top-1/2 w-16 h-16 opacity-30" viewBox="0 0 64 64" fill="none">
-            <circle cx="16" cy="16" r="4" fill="#3b82f6" />
-            <circle cx="48" cy="32" r="3" fill="#1e3a8a" />
-            <circle cx="32" cy="48" r="2" fill="#3b82f6" />
-          </svg>
-          {/* Abstract fish silhouette (mirrored) */}
-          <svg className="absolute left-20 bottom-24 w-20 h-10 opacity-20" viewBox="0 0 80 40" fill="none">
-            <ellipse cx="40" cy="20" rx="30" ry="10" fill="#1e3a8a" />
-            <polygon points="10,20 0,10 0,30" fill="#3b82f6" />
-          </svg>
-        </div>
-        {/* Left: Register form (card) */}
-        <div className="relative z-10 flex items-center justify-center min-w-[60%] bg-white/80 backdrop-blur-md p-8 md:p-12">
-          <Card className="w-full max-w-lg md:max-w-xl shadow-lg rounded-2xl border-0">
-            <CardContent className="py-10 px-8">
-              <h3 className="text-2xl font-bold text-[#1e3a8a] mb-6 text-center">Create your account</h3>
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-50 to-blue-200 p-4">
+      <div className="w-full max-w-6xl bg-white rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden">
+        {/* Left: Register form */}
+        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+          <Card className="w-full max-w-md mx-auto bg-transparent border-0">
+            <CardContent className="p-0">
+              <h3 className="text-3xl font-bold text-gray-800 mb-8 text-center">Create Your Account</h3>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField
                     control={form.control}
                     name="fullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Full Name</FormLabel>
+                        <FormLabel className="text-gray-600">Full Name</FormLabel>
                         <FormControl>
-                          <Input type="text" placeholder="Your full name" autoComplete="name" {...field} />
+                          <Input type="text" placeholder="John Doe" {...field} className="bg-gray-100 border-gray-300 text-gray-800 placeholder-gray-400 focus:ring-blue-500" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -109,9 +75,9 @@ export default function RegisterPage() {
                     name="companyName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Company Name</FormLabel>
+                        <FormLabel className="text-gray-600">Company Name</FormLabel>
                         <FormControl>
-                          <Input type="text" placeholder="Your company name" autoComplete="organization" {...field} />
+                          <Input type="text" placeholder="Your Company" {...field} className="bg-gray-100 border-gray-300 text-gray-800 placeholder-gray-400 focus:ring-blue-500" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -122,9 +88,9 @@ export default function RegisterPage() {
                     name="address"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Address</FormLabel>
+                        <FormLabel className="text-gray-600">Address</FormLabel>
                         <FormControl>
-                          <Input type="text" placeholder="Your address" autoComplete="street-address" {...field} />
+                          <Input type="text" placeholder="123 Main St, Anytown" {...field} className="bg-gray-100 border-gray-300 text-gray-800 placeholder-gray-400 focus:ring-blue-500" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -135,9 +101,9 @@ export default function RegisterPage() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-gray-600">Email</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="you@example.com" autoComplete="email" {...field} />
+                          <Input type="email" placeholder="you@example.com" {...field} className="bg-gray-100 border-gray-300 text-gray-800 placeholder-gray-400 focus:ring-blue-500" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -148,9 +114,9 @@ export default function RegisterPage() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel className="text-gray-600">Password</FormLabel>
                         <FormControl>
-                          <Input type="password" placeholder="••••••••" autoComplete="new-password" {...field} />
+                          <Input type="password" placeholder="••••••••" {...field} className="bg-gray-100 border-gray-300 text-gray-800 placeholder-gray-400 focus:ring-blue-500" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -161,47 +127,47 @@ export default function RegisterPage() {
                     name="agree"
                     render={({ field }) => (
                       <FormItem>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-3">
                           <FormControl>
-                            <input
-                              type="checkbox"
-                              id="agree"
-                              checked={field.value}
-                              onChange={e => field.onChange(e.target.checked)}
-                              className="w-4 h-4 accent-blue-600 rounded border-gray-300 focus:ring-2 focus:ring-blue-500"
-                            />
-                          </FormControl>
-                          <Label htmlFor="agree" className="cursor-pointer select-none">
-                            I agree to the <a href="#" className="underline text-blue-600">services</a>
-                          </Label>
+                          <input
+                            type="checkbox"
+                            id="agree"
+                            checked={field.value}
+                            onChange={e => field.onChange(e.target.checked)}
+                            className="w-5 h-5 accent-blue-600 rounded border-gray-300 focus:ring-2 focus:ring-blue-500"
+                          />
+                        </FormControl>
+                        <Label htmlFor="agree" className="cursor-pointer select-none text-gray-600">
+                          I agree to the <a href="#" className="underline text-blue-600 hover:text-blue-700">Terms of Service</a>
+                        </Label>
                         </div>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" className="w-full mt-2 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white font-semibold text-lg rounded-lg shadow-md hover:from-[#3b82f6] hover:to-[#1e3a8a] transition-all duration-200">
-                    Register
+                  <Button type="submit" className="w-full mt-4 bg-blue-600 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                    Create Account
                   </Button>
-                  <div className="flex flex-col md:flex-row justify-between items-center mt-4 gap-2 text-sm">
-                    <span className="text-gray-400">Already have an account?</span>
-                    <Link href="/login" className="text-[#1e3a8a] hover:underline hover:text-[#3b82f6] transition-colors">Sign in</Link>
+                  <div className="text-center mt-4 text-sm">
+                    <span className="text-gray-500">Already have an account? </span>
+                    <Link href="/login" className="text-blue-600 hover:underline hover:text-blue-700 transition-colors">Sign In</Link>
                   </div>
                 </form>
               </Form>
             </CardContent>
           </Card>
         </div>
-        {/* Right: Welcome content (mirrored) */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center items-end px-10 py-12 bg-gradient-to-br from-[#1e3a8a]/90 to-[#3b82f6]/80 text-white min-w-[35%] text-right">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">Welcome Aboard!</h1>
-          <h2 className="text-xl md:text-2xl font-semibold mb-6">Join the fishing adventure</h2>
-          <p className="text-lg mb-8 max-w-md opacity-90 ml-auto">
-            Create your account to track your catches, discover new fishing spots, and connect with a community of passionate anglers. Cast your first line today!
-          </p>
-          <div className="flex gap-3 mt-4 justify-end">
-            <span className="inline-block w-3 h-3 rounded-full bg-white/80 animate-pulse" />
-            <span className="inline-block w-2 h-2 rounded-full bg-white/60 animate-pulse delay-200" />
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse delay-400" />
+
+        {/* Right: Welcome content */}
+        <div className="hidden md:flex flex-1 flex-col justify-center items-center p-10 text-white text-center bg-gradient-to-br from-blue-400 to-blue-600 rounded-r-3xl">
+          <div className="max-w-sm">
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg">Join Our Community</h1>
+            <p className="text-lg opacity-90 mb-8">
+              Discover a new way to manage your projects and collaborate with your team.
+            </p>
+            <div className="flex justify-center gap-4">
+              <img src="/window.svg" alt="Community" className="w-48 h-48" />
+            </div>
           </div>
         </div>
       </div>

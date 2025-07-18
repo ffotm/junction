@@ -8,97 +8,123 @@ import { Card, CardContent } from '@/components/ui/card';
 const features = [
   {
     icon: '🌊',
-    title: 'Real-time Water Monitoring',
-    description: 'Track pH, temperature, and oxygen levels with live sensor data.'
+    title: 'Water Quality Monitoring',
+    description: 'Real-time tracking of pH, dissolved oxygen, temperature, and ammonia levels in your fish ponds.'
   },
   {
-    icon: '🤖',
-    title: 'Automated Controls',
-    description: 'Automate aeration, feeding, and water flow for optimal conditions.'
+    icon: '🐟',
+    title: 'Fish Health Analytics',
+    description: 'Monitor fish behavior, growth rates, and health indicators with AI-powered analysis.'
   },
   {
-    icon: '📈',
-    title: 'AI Insights',
-    description: 'Get actionable recommendations to boost yield and reduce costs.'
+    icon: '⚡',
+    title: 'Automated Pond Systems',
+    description: 'Smart aeration, feeding schedules, and water circulation based on pond conditions.'
+  },
+  {
+    icon: '�',
+    title: 'Yield Optimization',
+    description: 'Data-driven insights to maximize fish production and minimize operational costs.'
+  },
+  {
+    icon: '🚨',
+    title: 'Alert System',
+    description: 'Instant notifications for critical pond conditions and equipment malfunctions.'
   },
   {
     icon: '📱',
-    title: 'Mobile Dashboard',
-    description: 'Manage your ponds from anywhere, on any device.'
+    title: 'Mobile Management',
+    description: 'Control and monitor your fish ponds remotely from any device, anywhere.'
   }
 ];
 
 const steps = [
   {
     number: 1,
-    title: 'Install Sensors',
-    description: 'Place wireless sensors in your ponds to start collecting data.'
+    title: 'Deploy Pond Sensors',
+    description: 'Install waterproof IoT sensors in your fish ponds to monitor water quality parameters.'
   },
   {
     number: 2,
-    title: 'Connect & Configure',
-    description: 'Link your devices and set up automation rules in minutes.'
+    title: 'Setup Dashboard',
+    description: 'Configure your personalized dashboard and set optimal ranges for your fish species.'
   },
   {
     number: 3,
-    title: 'Monitor & Optimize',
-    description: 'Track performance, receive alerts, and optimize with AI.'
+    title: 'Automate Operations',
+    description: 'Enable smart automation for feeding, aeration, and water management systems.'
+  },
+  {
+    number: 4,
+    title: 'Scale & Optimize',
+    description: 'Use AI insights to optimize production and expand your aquaculture operations.'
   }
 ];
 
 const testimonials = [
   {
-    name: 'Sarah, Farm Owner',
-    quote: 'AquaFarm Pro transformed our operations. We catch issues before they become problems!'
+    name: 'Maria Rodriguez',
+    title: 'Tilapia Farm Owner',
+    quote: 'Since using AquaFarm Pro, our fish mortality rate dropped by 40% and production increased by 25%. The early warning system is a game-changer!'
   },
   {
-    name: 'James, Operations Manager',
-    quote: 'The automation and insights save us hours every week. Highly recommended.'
+    name: 'David Chen',
+    title: 'Aquaculture Operations Manager',
+    quote: 'The automated feeding and aeration systems have saved us countless hours. Our fish are healthier and our costs are down significantly.'
   },
   {
-    name: 'Priya, Aquaculture Consultant',
-    quote: 'My clients love the real-time data and easy-to-use dashboard.'
+    name: 'Jennifer Thompson',
+    title: 'Catfish Farm Consultant',
+    quote: 'I recommend AquaFarm Pro to all my clients. The water quality monitoring and AI insights help optimize every aspect of pond management.'
   }
 ];
 
 const partners = [
-  'PartnerOne', 'FishTech', 'AquaSense', 'BlueWave'
+  'AquaTech Solutions', 'FishSense Pro', 'PondMaster', 'BlueWave Systems', 'AquaFlow', 'SmartPond'
 ];
 
 const pricing = [
   {
     name: 'Starter',
-    price: '$49/mo',
-    features: ['Up to 3 ponds', 'Basic monitoring', 'Email alerts'],
-    cta: 'Start Free'
+    price: '$79/mo',
+    features: ['Up to 5 ponds', 'Basic water monitoring', 'Email alerts', 'Mobile app access'],
+    cta: 'Start Free Trial'
   },
   {
-    name: 'Pro',
-    price: '$149/mo',
-    features: ['Up to 20 ponds', 'Full automation', 'AI insights', 'SMS alerts'],
-    cta: 'Start Free',
+    name: 'Professional',
+    price: '$199/mo',
+    features: ['Up to 25 ponds', 'Advanced analytics', 'Automated systems', 'SMS & email alerts', 'Fish health tracking'],
+    cta: 'Start Free Trial',
     popular: true
   },
   {
     name: 'Enterprise',
     price: 'Custom',
-    features: ['Unlimited ponds', 'Custom integrations', 'Dedicated support'],
+    features: ['Unlimited ponds', 'Custom integrations', 'Dedicated support', 'On-site training', 'API access'],
     cta: 'Contact Sales'
   }
 ];
 
 const faqs = [
   {
-    q: 'How quickly can I get started?',
-    a: 'Most farms are up and running in under an hour.'
+    q: 'What types of fish can I monitor with AquaFarm Pro?',
+    a: 'Our system works with all common aquaculture species including tilapia, catfish, salmon, trout, bass, and more. The platform adapts to species-specific requirements.'
   },
   {
-    q: 'Is my data secure?',
-    a: 'Yes, we use industry-standard encryption and best practices.'
+    q: 'How quickly can I set up the monitoring system?',
+    a: 'Most pond installations are completed within 2-4 hours. Our wireless sensors are easy to deploy and the dashboard setup takes just minutes.'
   },
   {
-    q: 'Can I integrate with other farm tools?',
-    a: 'Absolutely! We support a wide range of integrations.'
+    q: 'What happens if my internet connection goes down?',
+    a: 'Our sensors store data locally and sync automatically when connection is restored. Critical alerts can also be sent via SMS backup.'
+  },
+  {
+    q: 'Can I integrate with my existing pond equipment?',
+    a: 'Yes! AquaFarm Pro integrates with most aerators, feeders, and filtration systems through our API and hardware adapters.'
+  },
+  {
+    q: 'Do you provide training and support?',
+    a: 'Absolutely. We offer comprehensive onboarding, video tutorials, and 24/7 technical support to ensure your success.'
   }
 ];
 
@@ -128,7 +154,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1e3a8a] via-[#3b82f6] to-[#ffffff] relative overflow-x-hidden">
+    <div className="bg-gradient-to-br from-[#1e3a8a] via-[#3b82f6] to-[#ffffff] relative overflow-x-hidden">
       {/* Animated SVG Waves and Dots */}
       <motion.div
         initial={{ opacity: 0, y: -40 }}
@@ -170,10 +196,10 @@ export default function LandingPage() {
         <Card className="bg-white/30 backdrop-blur-lg shadow-2xl rounded-3xl max-w-3xl mx-auto p-10 border-0">
           <CardContent className="flex flex-col items-center">
             <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="text-4xl md:text-5xl font-extrabold text-[#1e3a8a] text-center mb-4 drop-shadow-lg">
-              Smart Aquaculture, Simplified
+              Smart Fish Pond Management
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="text-lg md:text-2xl text-blue-900/80 text-center mb-8">
-              Monitor, automate, and optimize your ponds with real-time data and AI-driven insights.
+              Maximize your fish production with intelligent monitoring, automated systems, and data-driven insights for healthier ponds and higher yields.
             </motion.p>
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.7 }}>
               <Button size="lg" className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white font-semibold text-lg rounded-lg shadow-md px-8 py-4">
@@ -192,9 +218,9 @@ export default function LandingPage() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="py-20 z-10"
       >
-        <div className="max-w-5xl mx-auto px-4">
+        <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-[#1e3a8a] mb-12">How It Works</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-4 gap-8">
             {steps.map((step, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }} className="bg-white/60 backdrop-blur-lg rounded-2xl shadow-lg p-8 flex flex-col items-center">
                 <div className="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full text-2xl font-bold mb-4 text-blue-700">{step.number}</div>
@@ -214,9 +240,9 @@ export default function LandingPage() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="py-20 bg-white/40 z-10"
       >
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-[#1e3a8a] mb-12">Key Features</h2>
-          <div className="grid md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-[#1e3a8a] mb-12">Comprehensive Pond Management Features</h2>
+          <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-8">
             {features.map((feature, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }} className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-lg p-8 flex flex-col items-center">
                 <div className="w-14 h-14 flex items-center justify-center bg-blue-100 rounded-full text-3xl mb-4">{feature.icon}</div>
@@ -242,7 +268,10 @@ export default function LandingPage() {
             {testimonials.map((t, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 * i }} className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-8 flex flex-col items-center">
                 <p className="text-gray-700 italic mb-4">“{t.quote}”</p>
-                <span className="text-blue-700 font-semibold">{t.name}</span>
+                <div className="text-center">
+                  <span className="text-blue-700 font-semibold block">{t.name}</span>
+                  <span className="text-gray-600 text-sm">{t.title}</span>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -324,8 +353,8 @@ export default function LandingPage() {
         <div className="max-w-2xl mx-auto px-4 text-center">
           <Card className="bg-white/60 backdrop-blur-lg shadow-2xl rounded-3xl p-10 border-0">
             <CardContent>
-              <h2 className="text-3xl font-bold text-[#1e3a8a] mb-4">Ready to transform your aquaculture?</h2>
-              <p className="text-lg text-blue-900/80 mb-8">Join hundreds of successful farmers using AquaFarm Pro to optimize their operations.</p>
+              <h2 className="text-3xl font-bold text-[#1e3a8a] mb-4">Ready to revolutionize your fish farming?</h2>
+              <p className="text-lg text-blue-900/80 mb-8">Join thousands of successful fish farmers using AquaFarm Pro to maximize yields, reduce costs, and ensure healthier fish populations.</p>
               <Button size="lg" className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white font-semibold text-lg rounded-lg shadow-md px-8 py-4">
                 Get Started
               </Button>
@@ -334,23 +363,7 @@ export default function LandingPage() {
         </div>
       </motion.section>
 
-      {/* FOOTER */}
-      <motion.footer
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="bg-gray-900 text-white py-12 z-10"
-      >
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0 font-bold text-xl">AquaFarm Pro</div>
-          <div className="flex gap-6 text-gray-400 text-sm">
-            <a href="#" className="hover:text-white">Privacy</a>
-            <a href="#" className="hover:text-white">Terms</a>
-            <a href="#" className="hover:text-white">Contact</a>
-          </div>
-          <div className="text-gray-400 text-sm mt-4 md:mt-0">&copy; 2025 AquaFarm Pro. All rights reserved.</div>
-        </div>
-      </motion.footer>
+
     </div>
   );
 }

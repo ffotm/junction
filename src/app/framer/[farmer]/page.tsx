@@ -2,9 +2,9 @@ interface FarmerPageProps {
   params: { farmer: string }
 }
 
-export default function FarmerPage({ params }: FarmerPageProps) {
+export default async function FarmerPage({ params }: FarmerPageProps) {
   // Expecting params.farmer to be like "f2"
-  const match = params.farmer.match(/^f(\d+)$/);
+  const match = await params.farmer.match(/^f(\d+)$/);
   const farmerId = match ? match[1] : null;
 
   if (!farmerId) {
