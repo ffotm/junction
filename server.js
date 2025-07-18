@@ -76,3 +76,9 @@ const isAuthenticated = (req, res, next) => {
 };
 import adminRoutes from "./admin.js";
 adminRoutes(app, db, isAuthenticated, __dirname);
+
+
+// Start server
+app.listen(port, () => {
+    console.log(`Server running on ${port}`);
+});
