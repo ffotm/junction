@@ -1,7 +1,9 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { AlertTriangle, History, Fish, Settings, Thermometer, Droplets, Camera, Map, Activity, Calendar, Clock, CheckCircle, Zap, Wind, Sun, Bell, Download, RefreshCw, TrendingUp, TrendingDown, Minus, AlertCircle, Play } from 'lucide-react';
+import Link from 'next/link';
+import { AlertTriangle, History, Fish, Settings, Thermometer, Droplets, Camera, Map as MapIcon, Activity, Calendar, Clock, CheckCircle, Zap, Wind, Sun, Bell, Download, RefreshCw, TrendingUp, TrendingDown, Minus, AlertCircle, Play, Battery, BatteryLow } from 'lucide-react';
 import SimpleChart from '@/components/dashboard/SimpleChart';
+import MapView from '@/components/dashboard/Map';
 
 // Mock Data
 const pond = {
@@ -54,8 +56,23 @@ const upcomingTasks = [
   { time: '22:00', task: 'Night camera check', priority: 'medium' },
 ];
 
+const sensorStatus = [
+    { id: 'T-101', name: 'Temperature Sensor', battery: 85 },
+    { id: 'PH-201', name: 'pH Sensor', battery: 92 },
+    { id: 'O2-301', name: 'Oxygen Sensor', battery: 15 },
+    { id: 'TB-401', name: 'Turbidity Sensor', battery: 55 },
+];
+
 const latestData = chartData[chartData.length - 1];
 const previousData = chartData[chartData.length - 2];
+
+interface Alert {
+  type: 'critical' | 'warning';
+  message: string;
+  recommendation: string;
+}
+
+type ThresholdKey = keyof typeof thresholds;
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('general dashboard');
@@ -89,17 +106,27 @@ const Sidebar = () => {
   );
 };
 
-const PondPage = ({ pondId = "pond-1" }) => {
-  const [alerts, setAlerts] = useState([]);
+interface PondPageProps {
+  params: {
+    farmer: string;
+    zone: string;
+    pond: string;
+  }
+}
+
+const PondPage = ({ params }: PondPageProps) => {
+  const { farmer, zone, pond: pondId } = params;
+  const [alerts, setAlerts] = useState<Alert[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [activeView, setActiveView] = useState('overview');
 
   useEffect(() => {
-    const newAlerts = [];
+    const newAlerts: Alert[] = [];
     for (const key in thresholds) {
-      const threshold = thresholds[key];
-      const value = latestData[key];
-      const line = lines.find(l => l.key === key);
+      const typedKey = key as ThresholdKey;
+      const threshold = thresholds[typedKey];
+      const value = latestData[typedKey];
+      const line = lines.find(l => l.key === typedKey);
       
       if (typeof value === 'number') {
         if (value < threshold.min) {
@@ -131,13 +158,13 @@ const PondPage = ({ pondId = "pond-1" }) => {
     setTimeout(() => setRefreshing(false), 1000);
   };
 
-  const getTrend = (current, previous) => {
+  const getTrend = (current: number, previous: number) => {
     if (current > previous) return { icon: TrendingUp, color: 'text-green-500', text: 'trending up' };
     if (current < previous) return { icon: TrendingDown, color: 'text-red-500', text: 'trending down' };
     return { icon: Minus, color: 'text-gray-500', text: 'stable' };
   };
 
-  const getStatusColor = (key, value) => {
+  const getStatusColor = (key: ThresholdKey, value: number) => {
     const threshold = thresholds[key];
     if (!threshold) return 'bg-gray-100 text-gray-800';
     
@@ -252,14 +279,18 @@ const PondPage = ({ pondId = "pond-1" }) => {
 
           {/* Config, History, Fish Inventory Buttons */}
           <div className="flex flex-wrap gap-4">
-            <button className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 rounded-xl shadow-md border border-gray-200 transition-colors">
-              <Settings className="w-4 h-4" />
-              config
-            </button>
-            <button className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 rounded-xl shadow-md border border-gray-200 transition-colors">
-              <History className="w-4 h-4" />
-              history
-            </button>
+            <Link href={`/framer/${farmer}/${zone}/${pondId}/config`}>
+              <button className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 rounded-xl shadow-md border border-gray-200 transition-colors">
+                <Settings className="w-4 h-4" />
+                config
+              </button>
+            </Link>
+            <Link href={`/framer/${farmer}/${zone}/${pondId}/history`}>
+              <button className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 rounded-xl shadow-md border border-gray-200 transition-colors">
+                <History className="w-4 h-4" />
+                history
+              </button>
+            </Link>
             <button className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 rounded-xl shadow-md border border-gray-200 transition-colors">
               <Fish className="w-4 h-4" />
               fish inventory
@@ -269,11 +300,12 @@ const PondPage = ({ pondId = "pond-1" }) => {
           {/* Real Time Values Section */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {statusCards.map(card => {
-              const line = lines.find(l => l.key === card.key);
-              const value = latestData[card.key];
-              const prevValue = previousData[card.key];
+              const typedKey = card.key as ThresholdKey;
+              const line = lines.find(l => l.key === typedKey);
+              const value = latestData[typedKey];
+              const prevValue = previousData[typedKey];
               const trend = getTrend(value, prevValue);
-              const statusColor = getStatusColor(card.key, value);
+              const statusColor = getStatusColor(typedKey, value);
               
               return (
                 <div key={card.key} className={`bg-white rounded-2xl shadow-lg border border-slate-200 p-6 ${statusColor}`}>
@@ -309,7 +341,33 @@ const PondPage = ({ pondId = "pond-1" }) => {
           </div>
 
           {/* Bottom Grid: live camera, map, recent activity, upcoming tasks */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Sensor Battery Levels */}
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Battery className="w-5 h-5" />
+                    Sensor Battery Levels
+                </h2>
+                <div className="space-y-4">
+                    {sensorStatus.map(sensor => (
+                        <div key={sensor.id}>
+                            <div className="flex justify-between items-center mb-1 text-sm">
+                                <span className="font-medium text-gray-700">{sensor.name}</span>
+                                <span className={`font-semibold ${sensor.battery < 20 ? 'text-red-500' : 'text-gray-600'}`}>
+                                    {sensor.battery}%
+                                </span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                <div 
+                                    className={`h-2.5 rounded-full ${sensor.battery < 20 ? 'bg-red-500' : 'bg-green-500'}`} 
+                                    style={{ width: `${sensor.battery}%` }}
+                                ></div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
             {/* Live Camera */}
             <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
@@ -326,22 +384,18 @@ const PondPage = ({ pondId = "pond-1" }) => {
             </div>
             
             {/* Map */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 lg:col-span-2">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <Map className="w-5 h-5" />
-                map
+                <MapIcon className="w-5 h-5" />
+                Map
               </h2>
-              <div className="aspect-video bg-gradient-to-br from-blue-100 to-green-100 rounded-xl flex items-center justify-center">
-                <div className="text-center">
-                  <Map className="w-12 h-12 text-blue-400 mx-auto mb-2" />
-                  <p className="text-gray-600">Interactive map view</p>
-                  <p className="text-sm text-gray-500">GPS: 40.7128° N, 74.0060° W</p>
-                </div>
+              <div className="aspect-video rounded-xl overflow-hidden">
+                <MapView />
               </div>
             </div>
 
             {/* Recent Activity */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 lg:col-span-2">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <Activity className="w-5 h-5" />
                 recent activity

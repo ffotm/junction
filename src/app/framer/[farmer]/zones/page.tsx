@@ -1,18 +1,23 @@
-interface ZonePageProps {
-    params: { 
-      farmerId: string;
-      zoneId: string;
-    }
+import ZonesPage from '@/components/pages/Zones/ZonesPage';
+
+interface FarmerZonesPageProps {
+  params: Promise<{ 
+    farmer: string;
+  }>
+}
+
+export default async function FarmerZonesPage({ params }: FarmerZonesPageProps) {
+  const { farmer } = await params;
+
+  // Validate farmer parameter
+  const farmerMatch = farmer.match(/^f(\d+)$/);
+  if (!farmerMatch) {
+    return <div>Invalid farmer route</div>;
   }
-  
-  export default function ZonePage({ params }: ZonePageProps) {
-    const { farmerId, zoneId } = params;
-    
-    return (
-      <div>
-        <h1>Zone Dashboard</h1>
-        <p>Farmer: {farmerId}, Zone: {zoneId}</p>
-        {/* Your zone dashboard content */}
-      </div>
-    );
-  }
+
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <ZonesPage params={{ farmer }} />
+    </div>
+  );
+}

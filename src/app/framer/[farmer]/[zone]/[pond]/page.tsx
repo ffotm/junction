@@ -33,6 +33,6 @@ export default async function Pond({ params }: PondPageProps) {
   }
 
   return (
-    <PondPage pondId={pondId}/>
+    <PondPage params={{ farmer, zone, pond }} />
   );
 }

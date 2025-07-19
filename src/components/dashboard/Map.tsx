@@ -1,29 +1,31 @@
 'use client'
 import React, { useState } from 'react';
-import Map, { Marker, Popup, ViewStateChangeEvent } from 'react-map-gl/mapbox';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import Map, { Marker, Popup } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { Pin } from 'lucide-react';
 
-const MAPBOX_TOKEN = 'pk.eyJ1Ijoiam9yZGFuLWZpcyIsImEiOiJjbWJmaW1rZHAyODZrMmxzYnNhOXltMjZxIn0.FT7CLX_l4Fl4O-Z98UFJYQ';
+// It's recommended to move this to an environment variable
+const MAPTILER_API_KEY = '1pQFj1hxt4HqUv6OOFx3'; // TODO: Replace with your MapTiler API key
 
 const MapView = () => {
-  const [viewport, setViewport] = useState({
-    longitude: 3.263,
-    latitude: 34.67279,
-    zoom: 13,
-  });
   const [showPopup, setShowPopup] = useState(true);
+
+  const mapStyle = `https://api.maptiler.com/maps/streets/style.json?key=${MAPTILER_API_KEY}`;
 
   return (
     <Map
-      {...viewport}
+      initialViewState={{
+        longitude: 3.263,
+        latitude: 34.67279,
+        zoom: 13,
+      }}
       style={{ width: '100%', height: '100%' }}
-      mapStyle="mapbox://styles/mapbox/satellite-streets-v12"
-      mapboxAccessToken={MAPBOX_TOKEN}
-      onMove={evt => setViewport(evt.viewState)}
+      mapStyle={mapStyle}
     >
-      <Marker longitude={3.263} latitude={34.67279} onClick={() => setShowPopup(true)}>
-        <Pin className="text-blue-500 w-8 h-8" />
+      <Marker longitude={3.263} latitude={34.67279}>
+        <div onClick={() => setShowPopup(true)} style={{ cursor: 'pointer' }}>
+            <Pin className="text-blue-500 w-8 h-8" />
+        </div>
       </Marker>
       {showPopup && (
         <Popup
