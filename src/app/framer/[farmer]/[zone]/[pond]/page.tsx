@@ -1,5 +1,5 @@
 import React from 'react'
-// import PondDashboard from '@/components/pages/Ponds/PondPage'
+import PondPage from '@/components/pages/Ponds/PondPage'
 
 interface PondPageProps {
   params: Promise<{ farmer: string; zone: string; pond: string }>
@@ -33,12 +33,6 @@ export default async function Pond({ params }: PondPageProps) {
   }
 
   return (
-    <div>
-      <h1>Pond Dashboard</h1>
-      <p>Farmer ID: {farmerId}</p>
-      <p>Zone ID: {zoneId}</p>
-      <p>Pond ID: {pondId}</p>
-      {/* <PondDashboard pondId={pondId}/> */}
-    </div>
+    <PondPage params={{ farmer, zone, pond }} />
   );
 }
